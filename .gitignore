@@ -5,4 +5,4 @@
 .idea
 
 # oauth 설정
-src/main/resources/application-oauth.yml
+application-oauth.yml
