@@ -55,6 +55,7 @@ cmake-build-*/
 
 # IntelliJ
 out/
+out
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
@@ -136,6 +137,7 @@ hs_err_pid*
 /.gradle/
 .gradle
 build/
+build
 
 # Ignore Gradle GUI config
 gradle-app.setting
