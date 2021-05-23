@@ -44,3 +44,21 @@
     - ec2 실행하기
         + ssh config에 등록한 서비스명
         + 질문에 yes
+   
+4. 서버 사전 준비
+   - Java 11 설치
+      + Amazon Linux AMI 2에서 먼저 java -version으로 확인
+      + yum list java*jdk-devel 명령어로 설치 가능한 버전 확인
+      + java 11이 없는 경우, sudo yum install java-11-amazon-corretto-headless 로 설치 후 버전 확인
+      + 참고: https://docs.aws.amazon.com/ko_kr/corretto/latest/corretto-11-ug/amazon-linux-install.html
+   - 타임존 변경
+      + sudo rm /etc/localtime
+      + sudo ln -s /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+      + date 명령어로 제대로 변경되었는지 확인
+   - Hostname 변경
+      + sudo vim /etc/sysconfig/network
+      + HOSTNAME=본인이_원하는_서버명
+      + sudo reboot 후 확인
+      + sudo vim /etc/hosts
+      + 127.0.0.1 위에서_지정한_서버명
+      + curl 위에서_지정한_서버명 명령어로 호스트명 등록 확인
