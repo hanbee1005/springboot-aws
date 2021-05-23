@@ -91,3 +91,7 @@
     - mysql -u 계정 -p -h Host주소
     - show databases; 로 생성한 데이터베이스 확인
     
+## EC2 서버에 프로젝트 배포
+1. EC2에 Git 설치
+    - sudo yum install git 
+    - 
