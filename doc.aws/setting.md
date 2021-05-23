@@ -62,3 +62,32 @@
       + sudo vim /etc/hosts
       + 127.0.0.1 위에서_지정한_서버명
       + curl 위에서_지정한_서버명 명령어로 호스트명 등록 확인
+    
+## RDS 설정
+1. RDS Maria DB 인스턴스 생성
+   
+2. 운영환경에 맞는 파라미터 설정
+    - 파라미터 그룹 새로 생성 후 아래 파라미터를 찾아 수정
+        + 타임존   
+            * time_zone 을 Asia/Seoul 로 수정
+        + Character Set
+            * character_ 로 시작하는 항목 6개를 utf8mb4로 수정
+            * collation_ 로 시작하는 항목 2개를 utf8mb4_general_ci로 수정
+            * utf8은 이모지 저장이 안되고 utf8mb4는 이모지 저장이 가능
+        + Max Connection
+            * max_connections 150으로 수정
+    
+3. 새로 생성한 파라미터 그룹을 DB 인스턴스에 적용
+
+4. 로컬 PC에서 접속하기
+    - RDS 보안그룹 인바운드 규칙으로 다음 2가지 추가
+        + EC2 보안그룹
+        + 내 IP
+    - DB 플러그인 설치 및 파라미터 설정 확인
+    
+5. EC2에서 RDS 접근 확인
+    - ssh ec2명
+    - sudo yum install mysql
+    - mysql -u 계정 -p -h Host주소
+    - show databases; 로 생성한 데이터베이스 확인
+    
