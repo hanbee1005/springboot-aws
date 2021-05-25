@@ -39,8 +39,3 @@ dependencies {
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
-
-test {
-    useJUnitPlatform()
-    // ignoreFailures = true
-}
