@@ -94,4 +94,35 @@
 ## EC2 서버에 프로젝트 배포
 1. EC2에 Git 설치
     - sudo yum install git 
-    - 
+    - git --version 으로 설치 확인
+    - mkdir ~/app && mkdir ~/app/step1 로 프로젝트를 저장할 디렉토리 생성
+    - cd ~/app/step1 디렉토리 이동
+    - git clone 깃허브_레포지토리_주소
+    - cd 프로젝트명
+    - ./gradlew test 로 테스트가 잘 실행되는지 확인
+    
+2. 배포 스크립트 생성
+    - vim ~/app/step1/deploy.sh 파일을 생성
+    - git pull 받고 build 해서 생성된 jar 파일 실행하는 것까지 스크립트로 구현
+    - chmod +x ./deploy.sh 로 실행 권한 추가
+    - ./deploy.sh 로 실행
+    - vim nohup.out 으로 실행된 애플리케이션에서 출력된 내용을 확인 => 에러!
+    
+3. 외부 Security 파일 등록하기
+    - vim /home/ec2-user/app/application-oauth.yml 파일 생성
+    - 로컬에 있는 application-oauth.yml 파일 내용 복사 후 붙여넣기
+    - deploy.sh 수정 후 다시 실행
+    
+4. 스프링 부트 프로젝트로 RDS 접근
+    - RDS에 테이블 생성 (posts, user, 스프링 세션 테이블)
+    - build.gradle 파일에 mariadb 의존성 추가
+    - src/main/resources/ 에 application-real.yml 파일 생성 후 RDS 환경 profile 설정 추가
+    - EC2로 돌아와서
+    - vim ~/app/application-real-db.yml 파일 생성 후 DB 접속을 위한 연결 정보 저장
+    - deploy.sh 수정 후 실행
+    - curl localhost:8080 실행 시 html 코드가 나오면 정상
+    
+5. EC2에서 소셜 로그인하기
+    - AWS EC2 관련 보안 그룹 확인 (8080 포트가 오픈되어 있어야 함)
+    - AWS EC2의 퍼블릭 DNS 주소의 8080 포트로 접속되는지 확인
+    - 구글 및 네이버 승인 도메인으로 해당 EC2 도메인 주소 추가
