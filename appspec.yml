@@ -1,4 +1,4 @@
-version: 0.0 # CodeDeploy 버전
+version: 0.0
 os: linux
 files:
   - source: /
